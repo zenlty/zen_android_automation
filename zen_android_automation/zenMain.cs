@@ -25,7 +25,7 @@ namespace zen_android_automation
         {
             return initDeviceConfigs;
         }
-        public void zenInit(string? program, bool waitForExit = true, bool readOnlyOutput = false, DeviceConfig deviceConfig = DeviceConfig.USER, bool usePrebuilt = false)
+        public void zenInit(string? program, bool waitForExit = true, bool readLineOutput = false, DeviceConfig deviceConfig = DeviceConfig.USER, bool usePrebuilt = false)
         {
             if (usePrebuilt)
             {
@@ -37,7 +37,7 @@ namespace zen_android_automation
             }
             executeCommand.args = "";
             executeCommand.waitForExit = waitForExit;
-            executeCommand.readOnlyOutput = readOnlyOutput;
+            executeCommand.readLineOutput = readLineOutput;
             SetDeviceBuildConfig(deviceConfig);
             InitalizeRootConfigs(deviceConfig);
         }
@@ -230,11 +230,11 @@ namespace zen_android_automation
         }
         public string listPackages()
         {
-            getOutputType = executeCommand.readOnlyOutput;
+            getOutputType = executeCommand.readLineOutput;
             Console.WriteLine("Full output is true");
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " pm list packages";
             Console.WriteLine(executeCommand.runCommand());
-            executeCommand.readOnlyOutput = getOutputType;
+            executeCommand.readLineOutput = getOutputType;
             Console.WriteLine("Read only output set : " + getWaitForExitStatus);
             return "Sent!";
         }

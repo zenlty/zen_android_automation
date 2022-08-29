@@ -12,7 +12,7 @@ namespace zen_android_automation.Executer
     {
         public string appPath { get; set; } = System.AppDomain.CurrentDomain.BaseDirectory;
         public bool waitForExit { get; set; } = false;
-        public bool readOnlyOutput { get; set; } = false; // If false, automatically set ReadToEnd
+        public bool readLineOutput { get; set; } = false; // If false, automatically set ReadToEnd
         public string program { get; set; } = String.Empty;
         public string args { get; set; } = String.Empty;
         public string runCommand()
@@ -34,7 +34,7 @@ namespace zen_android_automation.Executer
                     process.WaitForExit();
                     break;
             }
-            switch (readOnlyOutput)
+            switch (readLineOutput)
             {
                 case true:
 #pragma warning disable CS8603 // Olası null başvuru dönüşü.
