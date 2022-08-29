@@ -25,7 +25,7 @@ namespace zen_android_automation.Executer
             startInfo.RedirectStandardOutput = true;
 
             startInfo.FileName = program;
-            startInfo.Arguments = " " + args;
+            startInfo.Arguments = " " + args + "  > /dev/null";
             process.StartInfo = startInfo;
             process.Start();
             switch (waitForExit)
