@@ -276,7 +276,7 @@ namespace zen_android_automation
         }
         public string getDevices()
         {
-            executeCommand.args = "devices"
+            executeCommand.args = "devices";
             executeCommand.runCommand();
             return "Sent!";
         }
