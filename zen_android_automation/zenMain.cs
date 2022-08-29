@@ -25,7 +25,7 @@ namespace zen_android_automation
         {
             return initDeviceConfigs;
         }
-        public void zenInit(string? program, string? args, bool waitForExit = true, bool readOnlyOutput = false, DeviceConfig deviceConfig = DeviceConfig.USER, bool usePrebuilt = false)
+        public void zenInit(string? program, bool waitForExit = true, bool readOnlyOutput = false, DeviceConfig deviceConfig = DeviceConfig.USER, bool usePrebuilt = false)
         {
             if (usePrebuilt)
             {
@@ -35,12 +35,11 @@ namespace zen_android_automation
             {
                 executeCommand.program = "adb.exe";
             }
-            executeCommand.args = args;
+            executeCommand.args = "";
             executeCommand.waitForExit = waitForExit;
             executeCommand.readOnlyOutput = readOnlyOutput;
             SetDeviceBuildConfig(deviceConfig);
             InitalizeRootConfigs(deviceConfig);
-
         }
         public string ActivateAdbRoot() // Only support USERDEBUG builds
         {
@@ -255,7 +254,6 @@ namespace zen_android_automation
             return "Sent!";
         }
         public string cleanAppData(string packageName)
-        //		os.system(f'adb -s {self.deviceId} shell "pm clear {package}"')
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " pm clear " + packageName ;
             executeCommand.runCommand();
@@ -278,7 +276,7 @@ namespace zen_android_automation
         {
             executeCommand.args = "devices";
             executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
     }
 }
