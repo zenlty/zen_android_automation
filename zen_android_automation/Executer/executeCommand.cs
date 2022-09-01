@@ -10,6 +10,7 @@ namespace zen_android_automation.Executer
 {
     public class executeCommand
     {
+        // OMIX Mobile Tech
         public string appPath { get; set; } = System.AppDomain.CurrentDomain.BaseDirectory;
         public bool waitForExit { get; set; } = false;
         public bool readLineOutput { get; set; } = false; // If false, automatically set ReadToEnd

@@ -52,9 +52,9 @@ namespace zen_android_automation
                     Console.WriteLine("Wait for exit set true");
                     executeCommand.waitForExit = true;
                     executeCommand.args = "root";
-                    executeCommand.runCommand();
+                    Console.WriteLine(executeCommand.runCommand());
                     executeCommand.args = "remount";
-                    executeCommand.runCommand();
+                    Console.WriteLine(executeCommand.runCommand());
                     executeCommand.waitForExit = getWaitForExitStatus;
                     Console.WriteLine("Wait for exit set : " + getWaitForExitStatus);
                     return "Executed all process!";
@@ -76,11 +76,11 @@ namespace zen_android_automation
                     Console.WriteLine("Wait for exit set true");
                     executeCommand.waitForExit = true;
                     executeCommand.args = "root";
-                    executeCommand.runCommand();
+                    Console.WriteLine(executeCommand.runCommand());
                     executeCommand.args = "remount";
-                    executeCommand.runCommand();
+                    Console.WriteLine(executeCommand.runCommand());
                     executeCommand.args = "disable-verity";
-                    executeCommand.runCommand();
+                    Console.WriteLine(executeCommand.runCommand());
                     Console.WriteLine("Wait for exit set : " + getWaitForExitStatus);
                     executeCommand.waitForExit = getWaitForExitStatus;
                     Console.WriteLine("Please reboot device and activate root permissions");
@@ -111,28 +111,27 @@ namespace zen_android_automation
         public string startServer()
         {
             executeCommand.args = "start-server";
-            executeCommand.runCommand();
+            Console.WriteLine(executeCommand.runCommand());
             return "Server is starting now!";
         }
         public string inputTap(string? x,string? y)
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + "  input tap " + x + " " + y;
-            executeCommand.runCommand();
+            Console.WriteLine(executeCommand.runCommand());
             return "Clicked X: " + x + " Y: " + y;
         }
         public string inputSwipe(string? x1, string? y1, string? x2, string? y2, int time = 200)
         {
            
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + "  input swipe " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + time;
-            executeCommand.runCommand();
+            Console.WriteLine(executeCommand.runCommand());
             return "Swipe " + x1 + ":" + y1 + " to " + x2 + ":" + y2 + " time=" + time;
 
         }
         public string inputText(string text)
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + "  input text " + text;
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
            
         }
         public string pressHome(bool method2 = false) // Please dont forget! Method 2 support some devices. 
@@ -146,51 +145,44 @@ namespace zen_android_automation
             {
                 executeCommand.args = "-s " + selfDevice + " shell " + initSU + " input keyevent KEYCODE_HOME";
             }
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string pressBack()
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " input keyevent KEYCODE_BACK";
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string pressPower()
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " input keyevent KEYCODE_POWER";
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string wakeup()
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " input keyevent KEYCODE_WAKEUP";
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string sleep()
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " input keyevent KEYCODE_SLEEP";
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string volumeUp()
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " input keyevent KEYCODE_VOLUMEUP";
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string volumeDown()
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " input keyevent KEYCODE_VOLUMEDOWN";
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string keycodeEvent(string keyCode)
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " input keyevent " + keyCode;
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
+
         public string launchApp(string packageName, bool closeFirst = false)
         {
             if (closeFirst) // 1. Close app 2. Launch app
@@ -206,27 +198,26 @@ namespace zen_android_automation
                 executeCommand.runCommand();
                 executeCommand.waitForExit = getWaitForExitStatus;
                 Console.WriteLine("Wait for exit set : " + getWaitForExitStatus);
+                return executeCommand.runCommand();
+
             }
             else // Just launch app
             {
                 executeCommand.args = "-s " + selfDevice + " shell " + initSU + " monkey -p " + packageName;
-                executeCommand.runCommand();
+                return executeCommand.runCommand();
             }
-            return "Sent!";
         }
         public string closeApp(string packageName)
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " am force-stop " + packageName;
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
 
         public string openAppDetailInSettings(string packageName)
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " am start -a android.settings.APPLICATION_DETAILS_SETTINGS -d package:" + packageName;
-            executeCommand.runCommand();
 
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string listPackages()
         {
@@ -236,7 +227,7 @@ namespace zen_android_automation
             Console.WriteLine(executeCommand.runCommand());
             executeCommand.readLineOutput = getOutputType;
             Console.WriteLine("Read only output set : " + getWaitForExitStatus);
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string reConnect() // Only support wirelles-debugging
         {
@@ -246,31 +237,27 @@ namespace zen_android_automation
 
 
             executeCommand.args = "disconnect";
-            executeCommand.runCommand();
 
+            Console.WriteLine(executeCommand.runCommand());
             executeCommand.args = "connect " + selfDevice;
-            executeCommand.runCommand();
 
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string cleanAppData(string packageName)
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " pm clear " + packageName ;
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string getDeviceName()
         {
             executeCommand.args = "-s " + selfDevice + " shell " + initSU + " getprop ro.product.device";
-            executeCommand.runCommand();
 
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string getDeviceStatus()
         {
             executeCommand.args = "-s " + selfDevice + " get-state";
-            executeCommand.runCommand();
-            return "Sent!";
+            return executeCommand.runCommand();
         }
         public string getDevices()
         {
