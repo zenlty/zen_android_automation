@@ -1,6 +1,6 @@
 # .NET Android Automation and Management Library
 
-- Coding with C# base on .NET Core 6.0 .
+- Coding with C# base on .NET Core 6.0
 - **Always use** the latest version of platform tools. Some features work in the latest version.
  [You can download here.](https://developer.android.com/studio/releases/platform-tools)
 - **Do not forget** to turn on USB Debugging before use.
